@@ -1,0 +1,98 @@
+запуск приложения
+node app.js
+
+создаем образ
+docker build -t logsapp:env .
+
+просмотреть образы
+docker images или docker image ls
+
+на основе image запускаем свой контейнер
+docker run -d -p 3000:4200 --env-file ./config/.env --rm --name logsapp logsapp:env
+
+
+посмотрим список запущенных контейнеров
+docker ps
+
+остановить контейнер
+docker stop CONTAINER ID
+или docker stop CONTAINER NAME
+
+удаление image
+docker rmi logsapp:exc
+
+docker volume // список методов volume
+docker volume ls // список всех volumes
+docker volume inspect logs // посмотреть содержимое volume
+docker volume rm logs // удаляем logs volume
+docker volume prune // удаление всех неиспользуемых volume
+docker volume create logs // создание volume с именем logs
+
+======================================
+Полезные команды
+docker images //просмотреть все образы
+docker run -d -p 3000:3000 IMAGE ID // запуск контейнера
+docker run -d -p 3000:3000 --name logsapp IMAGE ID // --name задается имя контейнеру;
+docker logs logsapp // удобно теперь, можно образаться по названию контейнера
+docker ps // показывает контейнеры, которые сейчас запущены
+docker attach CONTAINER ID // запускается интерактивная консоль того процесса, где запущен контейнер
+docker stop CONTAINER ID // выход из интерактивной консоли
+docker logs CONTAINER ID // посмотреть что происходило в контейнере
+docker run -d -p 3000:3000 --name logsapp --rm IMAGE ID // --rm как только контейнер остановится, то контейнер автоматически будет удален
+docker rmi IMAGE ID, IMAGE ID, ... // удаление images
+docker image prune // удаление всех неиспользуемых images
+=======================================
+удаление неиспользуемых контейнеров
+docker container prune
+
+
+=======================================
+создаем образ
+docker build .
+docker build -t logsapp: exc . // exc - версия; logsapp - имя image;
+docker run -d -p 3000:4200 --rm --name logsapp logsapp:env
+
+на основе image запускаем свой контейнер
+docker run -d -p 3000:3000 5c1acc7f3d20 // -d чтобы не запускалась интерактивная консоль, 5c1acc7f3d20 - IMAGE ID
+или docker run -d -p 3000:3000 --rm --name logsapp logsapp:exc
+
+на основе image запускаем свой контейнер
+docker run -p 3000:3000 5c1acc7f3d20
+
+====================================
+на основе image запускаем свой контейнер
+docker run 5c1acc7f3d20 , где 5c1acc7f3d20 это IMAGE ID
+получаем надпись Server listening on port 3000
+
+===================================
+открываем новый терминал
+docker ps // показывает контейнеры, которые сейчас запущены
+можем остановить контейнер
+docker stop 9d4223fb49af
+для запуска контейнера
+docker start 9d4223fb49af
+
+
+===================================
+https://hub.docker.com/_/node
+
+docker pull node
+
+docker images
+
+docker run node // команда run запускаем нам определенный контейнер
+docker ps --help // --help показывает список команд
+docker ps // показывает только те контейнеры, которые сейчас запущены
+docker ps -a // показывает список всех контейнеров
+
+docker run -it node // переходим в интерактивную консоль.
+// process.version версия node в docker
+// Находимся внутри контейнера, гле запущена node.js
+// .exit это выход
+// node -n локальная версия node
+
+Удаление не нужных контейнеров
+docker ps -a
+docker rm и вставляем один id контейнера или несколько id
+или docker container prune // удаляет все контейнеры, которые уже остановлены и не используются
+docker ps -a
